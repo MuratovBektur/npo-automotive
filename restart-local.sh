@@ -5,6 +5,14 @@ git pull;
 # по которому можно обращяться
 source docker-compose-name.sh;
 
-"${DOCKER_COMPOSE[@]}" -f docker-compose.local.yml down -v;
-"${DOCKER_COMPOSE[@]}" -f docker-compose.local.yml up -d --build;
+
+env_path="local.env"
+
+# Загружаем и экспортируем переменные окружения
+set -a  # автоматически экспортируем все переменные
+source $env_path;
+set +a  # отключаем автоэкспорт
+
+"${DOCKER_COMPOSE[@]}" -f docker-compose.local.yml --env-file $env_path down -v;
+"${DOCKER_COMPOSE[@]}" -f docker-compose.local.yml --env-file $env_path up -d --build;
 "${DOCKER_COMPOSE[@]}" -f docker-compose.local.yml logs -f --tail=100;

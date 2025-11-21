@@ -1,13 +1,18 @@
 version: "3.8"
 
-name: vue-nest_dev
+name: npo_automotive_dev
 
 services:
   server:
-    container_name: "vue-nest_server_dev"
+    container_name: "npo_automotive_server_dev"
     restart: always
     build: server
     command: npm run start:prod
+    user: 1000:1000
+    env_file:
+      - ./dev.env
+    depends_on:
+      - db
     expose:
       - 5000
     volumes:
@@ -16,7 +21,9 @@ services:
   nginx:
     image: nginx
     restart: "no"
-    container_name: "vue-nest_nginx_dev"
+    container_name: "npo_automotive_nginx_dev"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     ports:
       - 80:80
     depends_on:
@@ -25,3 +32,16 @@ services:
       - ./client/dist:/usr/share/nginx/html
       - /etc/localtime:/etc/localtime:ro
       - ./nginx/prod:/etc/nginx/conf.d
+  db:
+    container_name: npo_automotive_db_dev
+    image: postgres:17
+    restart: always
+    expose:
+      - 5432
+    environment:
+      - POSTGRES_DB=$DB_DATABASE
+      - POSTGRES_USER=$DB_USERNAME
+      - POSTGRES_PASSWORD=$DB_PASSWORD
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - ./postgres/dev:/var/lib/postgresql/data/pgdata

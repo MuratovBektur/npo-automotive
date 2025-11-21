@@ -2,5 +2,9 @@ node_modules
 *.log*
 .cache
 .output
-.env
 dist
+*.env
+!example.env
+nginx/certbot
+postgres
+dbgate

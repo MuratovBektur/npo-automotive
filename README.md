@@ -1,6 +1,18 @@
-# vue-nest-docker-template
+# npo_automotive
+
+## Предварительные требования
+
+### Установите docker и docker compose
+
+### Заполните файлы окружение по аналогии с example.env для соответствующего окружение (prod.env, dev.env, local.env)
 
 ## Запуск 
+
+```bash
+./restart-local.sh # local dev mode (port - 7000)
+```
+
+<br/>
 
 ```bash
 ./restart-dev.sh # dev mode (port - 7000)
@@ -41,3 +53,10 @@ cd client
 ```bash
 ./cli.sh your_command # например ./cli.sh npm i axios
 ```
+
+
+### Чтобы попасть в админку в бд (только в local режиме):
+
+1) зайдите на http://localhost:{порт, который указан в local.env}/dba/
+
+2) заполните форму для создании соединении с бд в соотвествием с тем что указана в файле окружении (local.env), но где поле Server укажите bd (по названию сервиса в docker-compose.local.yml)
