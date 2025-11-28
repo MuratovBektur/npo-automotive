@@ -60,3 +60,19 @@ cd client
 1) зайдите на http://localhost:{порт, который указан в local.env}/dba/
 
 2) заполните форму для создании соединении с бд в соотвествием с тем что указана в файле окружении (local.env), но где поле Server укажите bd (по названию сервиса в docker-compose.local.yml)
+
+
+### Чтобы запустить миграцию в локальной режиме:
+
+
+1) Перейдите в терминале в папку   сервера:
+
+```bash
+cd server
+```
+
+2) Пропишете команду для сервера:
+
+```bash
+./cli.sh npx ts-node node_modules/typeorm/cli.js migration:run -d src/data-source.ts 
+```
