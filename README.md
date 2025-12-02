@@ -24,8 +24,11 @@
 ./restart.sh # prod mode (port - 80)
 ```
 
-frontend: http://localhost:{порт, который указан в local.env}
-backend: http://localhost:{порт, который указан в local.env}/api
+Frontend: http://localhost:{порт, который указан в local.env}
+
+<br/>
+
+Backend: http://localhost:{порт, который указан в local.env}/api
 
 ## Инструменты разработки
 
