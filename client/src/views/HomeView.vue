@@ -22,6 +22,8 @@
 </template>
 
 <script setup lang="ts">
+import { api } from '@/lib/api'
+import { sleep } from '@/lib/helpers'
 import { ref } from 'vue'
 
 const requestsCount = ref(10)
@@ -45,16 +47,15 @@ async function startTest() {
 
   for (let i = 0; i < requestsCount.value; i++) {
     sent.value++
-    sendRequest()
-    await new Promise((res) => setTimeout(res, delayMs.value))
+    await sleep(delayMs.value)
+    await sendRequest()
   }
   elapsedTime.value = Date.now() - startTime.value
 }
 
 async function sendRequest() {
   try {
-    const res = await fetch('/items')
-    if (!res.ok) throw new Error(res.statusText)
+    await api.get('/items')
     success.value++
   } catch (error) {
     console.error(error)
