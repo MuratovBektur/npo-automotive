@@ -2,12 +2,7 @@
 import { Pool } from "pg";
 import { Module } from "@nestjs/common";
 
-import {
-  DB_DATABASE,
-  DB_PASSWORD,
-  DB_USERNAME,
-  DB_HOST,
-} from "../server/src/config";
+import { DB_DATABASE, DB_PASSWORD, DB_USERNAME, DB_HOST } from "src/config";
 
 const poolProvider = {
   provide: "PG_POOL",
